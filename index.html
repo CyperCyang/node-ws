@@ -1,722 +1,1204 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
-</head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="referrer" content="origin-when-cross-origin" />
+    
+    
+    
+    
+    <meta http-equiv="Cache-Control" content="no-transform" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>孤傲苍狼 - 博客园</title>
+    <link rel="icon" id="favicon" href="https://assets.cnblogs.com/favicon_v3_2.ico" type="image/x-icon" />
+    <link rel="canonical" href="https://www.cnblogs.com/xdp-gacl" />
+    
+    <link rel="stylesheet" href="/css/blog-common.min.css?v=R-rVrNMCww2yul5xXUhO700E4bdSawv9GWDBDURYdKA" />
+    
+
+    <link id="MainCss" rel="stylesheet" href="/skins/simpleclear/bundle-simpleclear.min.css?v=_t5jQzeTJryUKCWwDeCyofZUsfU7CnLnRKNoe_VXoUU" />
+        
+    <link type="text/css" rel="stylesheet" href="https://www.cnblogs.com/xdp-gacl/custom.css?v=ywxzTbV&#x2B;2OE&#x2B;OBzQ0AZQvXcKb58=" />
+    
+    <link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="/skins/simpleclear/bundle-simpleclear-mobile.min.css?v=EKxoCQ38F9HLitqjjbO_N3VcmK5Ok3DemSAAaWwfN2E" />
+    
+    <link type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/xdp-gacl/rss" />
+    <link type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/xdp-gacl/rsd.xml" />
+    <link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/xdp-gacl/wlwmanifest.xml" />
+    
 
     <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
-
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
-
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
+        var currentBlogId = 133816;
+        var currentBlogApp = 'xdp-gacl';
+        var isLogined = false;
+        var isBlogOwner = false;
+        window.isCorp = false;
+        window.skinName = 'SimpleClear';
+        var visitorUserId = '';
+        window.hasCustomScript = true;
+        window.cb_enable_mathjax = false;
+        window.mathEngine = 0;
+        window.codeHighlightEngine = 1;
+        window.enableCodeLineNumber = false;
+        window.codeHighlightTheme = 'cnblogs';
+        window.darkModeCodeHighlightTheme = 'vs2015';
+        window.isDarkCodeHighlightTheme = false;
+        window.isDarkModeCodeHighlightThemeDark = true;
+        window.isDisableCodeHighlighter = false;
+        window.enableCodeThemeTypeFollowSystem = false;
+        window.enableMacStyleCodeBlock = false;        
     </script>
-</body>
+    <script src="https://assets.cnblogs.com/scripts/jquery-3.3.1.min.js"></script>
+    <script src="https://cdn-www.cnblogs.com/js/blog-common.min.js?v=DlvrBKuTr2KJ0Aywt6gRjukU_kI-BE8jZESMvBBl3w8"></script>
+        <script>updateCustomBlogReferrer();</script>
+    
+</head>
+<body class="skin-simpleclear no-navbar">
+    <a name="top"></a>
+    <div id="top_nav" class="navbar forpc navbar-custom">
+        <nav id="nav_main" class="navbar-main">
+            <ul id="nav_left" class="navbar-list navbar-left">
+                <li class="navbar-branding">
+                    <a href="https://www.cnblogs.com/" title="开发者的网上家园" role="banner">
+                        <img src="//assets.cnblogs.com/logo.svg" alt="博客园logo" />
+                    </a>
+                </li>
+                <li><a href="https://cnblogs.vip/">会员</a></li>
+                <li><a href="https://cnblogs.vip/store">周边</a></li>
+                <li><a href="https://news.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-news')">新闻</a></li>
+                <li><a href="https://q.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-q')">博问</a></li>
+                <li><a href="https://ing.cnblogs.com/" onclick="countClicks('nav', 'skin-navbar-ing')">闪存</a></li>
+                <li><a href="https://www.cnblogs.com/cmt/p/18500368">众包</a></li>
+                <li><a href="https://www.cnblogs.com/cmt/p/19316348">赞助商</a></li>
+                <li><a href="https://chat2db-ai.com/" target="_blank" onclick="countClicks('nav', 'skin-navbar-chat2db')">Chat2DB</a></li>
+            </ul>
+            <ul id="nav_right" class="navbar-list navbar-right">
+                <li>
+                    <form id="zzk_search" class="navbar-search dropdown" action="https://zzk.cnblogs.com/s" method="get" role="search">
+                        <input name="w" id="zzk_search_input" placeholder="代码改变世界" type="search" tabindex="3" autocomplete="off" />
+                        <button id="zzk_search_button" onclick="window.navbarSearchManager.triggerActiveOption()">
+                            <img id="search_icon" class="focus-hidden" src="//assets.cnblogs.com/icons/search.svg" alt="搜索" />
+                            <img class="hidden focus-visible" src="//assets.cnblogs.com/icons/enter.svg" alt="搜索" />
+                        </button>
+                        <ul id="navbar_search_options" class="dropdown-menu quick-search-menu">
+                            <li tabindex="0" class="active" onclick="zzkSearch(event, document.getElementById('zzk_search_input').value)">
+                                <div class="keyword-wrapper">
+                                    <img src="//assets.cnblogs.com/icons/search.svg" alt="搜索" />
+                                    <div class="keyword"></div>
+                                </div>
+                                <span class="search-area">所有博客</span>
+                            </li>
+                                    <li tabindex="1" onclick="zzkBlogSearch(event, 'xdp-gacl', document.getElementById('zzk_search_input').value)">
+                                        <div class="keyword-wrapper">
+                                            <img src="//assets.cnblogs.com/icons/search.svg" alt="搜索" />
+                                            <div class="keyword"></div>
+                                        </div>
+                                        <span class="search-area">当前博客</span>
+                                    </li>
+                        </ul>
+                    </form>
+                </li>
+                <li id="navbar_login_status" class="navbar-list">
+                    <a class="navbar-user-info navbar-blog" href="https://i.cnblogs.com/EditPosts.aspx?opt=1" alt="写随笔" title="写随笔">
+                        <img id="new_post_icon" class="navbar-icon" src="//assets.cnblogs.com/icons/newpost.svg" alt="写随笔" />
+                    </a>
+                    <a id="navblog-myblog-icon" class="navbar-user-info navbar-blog" href="https://www.cnblogs.com/my" alt="我的博客" title="我的博客">
+                        <img id="myblog_icon" class="navbar-icon" src="//assets.cnblogs.com/icons/myblog.svg" alt="我的博客" />
+                    </a>
+                    <a class="navbar-user-info navbar-message navbar-icon-wrapper" href="https://msg.cnblogs.com/" alt="短消息" title="短消息">
+                        <img id="msg_icon" class="navbar-icon" src="//assets.cnblogs.com/icons/message.svg" alt="短消息" />
+                        <span id="msg_count" style="display: none"></span>
+                    </a>
+                    <a id="navbar_lite_mode_indicator" data-current-page="blog" style="display: none" href="javascript:void(0)" alt="简洁模式" title="简洁模式启用，您在访问他人博客时会使用简洁款皮肤展示">
+                        <img class="navbar-icon" src="//assets.cnblogs.com/icons/lite-mode-on.svg" alt="简洁模式" />
+                    </a>
+                    <div id="user_info" class="navbar-user-info dropdown">
+                        <a class="dropdown-button" href="https://home.cnblogs.com/">
+                            <img id="user_icon" class="navbar-avatar" src="//assets.cnblogs.com/icons/avatar-default.svg" alt="用户头像" />
+                        </a>
+                        <div class="dropdown-menu">
+                            <a id="navblog-myblog-text" href="https://www.cnblogs.com/my">我的博客</a>
+                            <a href="https://home.cnblogs.com/">我的园子</a>
+                            <a href="https://account.cnblogs.com/settings/account">账号设置</a>
+                            <a href="https://vip.cnblogs.com/my">会员中心</a>
+                            <a href="javascript:void(0)" id="navbar_lite_mode_toggle" title="简洁模式会使用简洁款皮肤显示所有博客">
+    简洁模式 <span id="navbar_lite_mode_spinner" class="hide">...</span>
+</a>
 
+                            <a href="javascript:void(0)" onclick="account.logout();">退出登录</a>
+                        </div>
+                    </div>
+                    <a class="navbar-anonymous" href="https://account.cnblogs.com/signup">注册</a>
+                    <a class="navbar-anonymous" href="javascript:void(0);" onclick="account.login()">登录</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <div id="page_begin_html">
+        <!-- Baidu Button BEGIN -->
+<!--<script type="text/javascript" id="bdshare_js" data="type=slide&amp;img=0&amp;pos=right&amp;uid=6507240" ></script>
+<script type="text/javascript" id="bdshell_js"></script>
+<script type="text/javascript">
+document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
+</script>-->
+<!-- Baidu Button END -->
+
+<!--添加博客目录-->
+<script type="text/javascript">
+  /*
+	功能：生成博客目录的JS工具
+	测试：IE8，火狐，google测试通过
+	孤傲苍狼
+	2014-5-11
+*/
+var BlogDirectory = {
+	/*
+		获取元素位置，距浏览器左边界的距离（left）和距浏览器上边界的距离（top）
+	*/
+	getElementPosition:function (ele) {        
+		var topPosition = 0;
+		var leftPosition = 0;
+		while (ele){              
+			topPosition += ele.offsetTop;
+			leftPosition += ele.offsetLeft;        
+			ele = ele.offsetParent;     
+		}  
+		return {top:topPosition, left:leftPosition}; 
+	},
+
+	/*
+	获取滚动条当前位置
+	*/
+	getScrollBarPosition:function () {
+		var scrollBarPosition = document.body.scrollTop || document.documentElement.scrollTop;
+		return  scrollBarPosition;
+	},
+	
+	/*
+	移动滚动条，finalPos 为目的位置，internal 为移动速度
+	*/
+	moveScrollBar:function(finalpos, interval) {
+
+		//若不支持此方法，则退出
+		if(!window.scrollTo) {
+			return false;
+		}
+
+		//窗体滚动时，禁用鼠标滚轮
+		window.onmousewheel = function(){
+			return false;
+		};
+		  
+		//清除计时
+		if (document.body.movement) { 
+			clearTimeout(document.body.movement); 
+		} 
+
+		var currentpos =BlogDirectory.getScrollBarPosition();//获取滚动条当前位置
+
+		var dist = 0; 
+		if (currentpos == finalpos) {//到达预定位置，则解禁鼠标滚轮，并退出
+			window.onmousewheel = function(){
+				return true;
+			}
+			return true; 
+		} 
+		if (currentpos < finalpos) {//未到达，则计算下一步所要移动的距离
+			dist = Math.ceil((finalpos - currentpos)/10); 
+			currentpos += dist; 
+		} 
+		if (currentpos > finalpos) { 
+			dist = Math.ceil((currentpos - finalpos)/10); 
+			currentpos -= dist; 
+		}
+		
+		var scrTop = BlogDirectory.getScrollBarPosition();//获取滚动条当前位置
+		window.scrollTo(0, currentpos);//移动窗口
+		if(BlogDirectory.getScrollBarPosition() == scrTop)//若已到底部，则解禁鼠标滚轮，并退出
+		{
+			window.onmousewheel = function(){
+				return true;
+			}
+			return true;
+		}
+		
+		//进行下一步移动
+		var repeat = "BlogDirectory.moveScrollBar(" + finalpos + "," + interval + ")"; 
+		document.body.movement = setTimeout(repeat, interval); 
+	},
+	
+	htmlDecode:function (text){
+		var temp = document.createElement("div");
+		temp.innerHTML = text;
+		var output = temp.innerText || temp.textContent;
+		temp = null;
+		return output;
+	},
+
+	/*
+	创建博客目录，
+	id表示包含博文正文的 div 容器的 id，
+	mt 和 st 分别表示主标题和次级标题的标签名称（如 H2、H3，大写或小写都可以！），
+	interval 表示移动的速度
+	*/
+	createBlogDirectory:function (id, mt, st, interval){
+		 //获取博文正文div容器
+		var elem = document.getElementById(id);
+		if(!elem) return false;
+		//获取div中所有元素结点
+		var nodes = elem.getElementsByTagName("*");
+		//创建博客目录的div容器
+		var divSideBar = document.createElement('DIV');
+		divSideBar.className = 'sideBar';
+		divSideBar.setAttribute('id', 'sideBar');
+		var divSideBarTab = document.createElement('DIV');
+		divSideBarTab.setAttribute('id', 'sideBarTab');
+		divSideBar.appendChild(divSideBarTab);
+		var h2 = document.createElement('H2');
+		divSideBarTab.appendChild(h2);
+		var txt = document.createTextNode('目录导航');
+		h2.appendChild(txt);
+		var divSideBarContents = document.createElement('DIV');
+		divSideBarContents.style.display = 'none';
+		divSideBarContents.setAttribute('id', 'sideBarContents');
+		divSideBar.appendChild(divSideBarContents);
+		//创建自定义列表
+		var dlist = document.createElement("dl");
+		divSideBarContents.appendChild(dlist);
+		var num = 0;//统计找到的mt和st
+		mt = mt.toUpperCase();//转化成大写
+		st = st.toUpperCase();//转化成大写
+		//遍历所有元素结点
+		for(var i=0; i<nodes.length; i++)
+		{
+			if(nodes[i].nodeName == mt|| nodes[i].nodeName == st)    
+			{
+				//获取标题文本
+				var nodetext = nodes[i].innerHTML.replace(/<\/?[^>]+>/g,"");//innerHTML里面的内容可能有HTML标签，所以用正则表达式去除HTML的标签
+				nodetext = nodetext.replace(/&nbsp;/ig, "");//替换掉所有的&nbsp;
+				nodetext = BlogDirectory.htmlDecode(nodetext);
+				//插入锚        
+				nodes[i].setAttribute("id", "blogTitle" + num);
+				var item;
+				switch(nodes[i].nodeName)
+				{
+					case mt:    //若为主标题 
+						item = document.createElement("dt");
+						break;
+					case st:    //若为子标题
+						item = document.createElement("dd");
+						break;
+				}
+				
+				//创建锚链接
+				var itemtext = document.createTextNode(nodetext);
+				item.appendChild(itemtext);
+				item.setAttribute("name", num);
+				item.onclick = function(){        //添加鼠标点击触发函数
+					var pos = BlogDirectory.getElementPosition(document.getElementById("blogTitle" + this.getAttribute("name")));
+					if(!BlogDirectory.moveScrollBar(pos.top, interval)) return false;
+				};            
+				
+				//将自定义表项加入自定义列表中
+				dlist.appendChild(item);
+				num++;
+			}
+		}
+		
+		if(num == 0) return false; 
+		/*鼠标进入时的事件处理*/
+		divSideBarTab.onmouseenter = function(){
+			divSideBarContents.style.display = 'block';
+		}
+		/*鼠标离开时的事件处理*/
+		divSideBar.onmouseleave = function() {
+			divSideBarContents.style.display = 'none';
+		}
+
+		document.body.appendChild(divSideBar);
+	}
+	
+};
+
+window.onload=function(){
+	/*页面加载完成之后生成博客目录*/
+	BlogDirectory.createBlogDirectory("cnblogs_post_body","h2","h3",20);
+}
+</script>
+
+<!--
+<div>
+
+DIY 博客全文界面的推荐、反对、加关注、返回顶部、快速评论等小功能的集成
+
+<script type="text/javascript">
+function focusFunction(){     document.getElementById("tbCommentBody").focus(); 
+}
+      
+window.onload = function(){
+   
+        /*在div_digg中添加关注链接*/
+        var div_digg = document.getElementById("div_digg");
+        
+        var my_div = document.createElement("div");
+        my_div.style.padding="0 0 5px 0";
+        my_div.innerHTML = "<a rel="nofollow noopener"  onclick=\"javascript:c_follow"+"();\" href=\"javascript:void(0);\" style=\"font-weight: bold; padding-left: 5px;\">关注 [孤傲苍狼]</a>"
+        
+        div_digg.insertBefore(my_div,div_digg.firstChild);
+        /*添加关注链接结束*/
+         /*添加评论快速入口*/
+        document.getElementById("digg_tips").innerHTML = "<a rel="nofollow noopener"  onclick=\"javascript:focusFunction();\" href=\"javascript:void(0);\" style=\"font-weight: bold; padding-left: 5px;\">快速评论</a>&nbsp;&nbsp;<a rel="nofollow noopener"  href=\"#top\" style=\"font-weight: bold; padding-left: 5px;\">返回顶部</a>";
+}
+</script>
+</div>
+-->
+    </div>
+
+    <div id="main">
+    <div id="header">
+        
+<h1><a id="Header1_HeaderTitle" class="headermaintitle HeaderMainTitle" href="https://www.cnblogs.com/xdp-gacl">孤傲苍狼</a>
+</h1>
+<p id="tagline">只为成功找方法，不为失败找借口！</p>
+
+
+    </div>
+    
+
+
+
+
+
+		
+<!--
+<p class="date">
+    <a href="https://www.cnblogs.com/xdp-gacl/p/archive/2016/04/05" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+    <partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+    <div class="post" role="article" aria-describedby="postlist_description_5354503" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/5354503.html">
+    <span>
+        创业公司如何实施敏捷开发(转载)
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_5354503">
+摘要：        
+转载自LANCEYAN.COM 说起敏捷开发，并不是因为敏捷而敏捷。这几年的敏捷开发已经被很多敏捷咨询服务商神话了，这个东西并不是神器，实施了就可以解决所有软件公司的问题，而是要结合自己公司的特点和问题摸索出适合自己的一套模式。 大家都知道，创业公司刚开始需要研发出一款产品并且能够使公司赚钱的产品，    <a href="https://www.cnblogs.com/xdp-gacl/p/5354503.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2016-04-05 14:06
+孤傲苍狼
+<span data-post-id="5354503" class="post-view-count">阅读(26448)</span>
+<span data-post-id="5354503" class="post-comment-count">评论(20)</span>
+<span data-post-id="5354503" class="post-digg-count">推荐(10)</span>
+
+
+        </div>
+    </div>
+    <div class="post" role="article" aria-describedby="postlist_description_5354767" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/5354767.html">
+    <span>
+        技术人员如何创业《二》- 合伙人的模式(转载)
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_5354767">
+摘要：        
+转载自LANCEYAN.COM “合伙人”其实从古到今都有，指一帮人聚集在一起干一件大事情，这个事情必须要借助大家的力量一起完成。比如水浒里的一百单八将、西游记里的五人组合。技术创业者刚出来创业一般也都会找合伙人，毕竟一个人搞定不了太多的事情，除非自己做的东西一个人可以搞定，比如开个小店之内的。如何    <a href="https://www.cnblogs.com/xdp-gacl/p/5354767.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2016-04-05 14:05
+孤傲苍狼
+<span data-post-id="5354767" class="post-view-count">阅读(7496)</span>
+<span data-post-id="5354767" class="post-comment-count">评论(0)</span>
+<span data-post-id="5354767" class="post-digg-count">推荐(0)</span>
+
+
+        </div>
+    </div>
+    <div class="post" role="article" aria-describedby="postlist_description_5354822" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/5354822.html">
+    <span>
+        技术人员如何创业《四》- 打造超强执行力团队(转载)
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_5354822">
+摘要：        
+转载自LANCEYAN.COM 好的团队是创业公司成功的必要因素之一。差劲的团队会导致整个团队没有战斗力，互相算计，只看到自己的利益，永远做不成一个好的产品。优秀的团队整个团体非常有凝聚力，以公司的事业为自己的事业，各自发挥自己的特长并互相帮助对方，不计较个人短暂的得失努力把公司推向一个又一个高点。    <a href="https://www.cnblogs.com/xdp-gacl/p/5354822.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2016-04-05 14:05
+孤傲苍狼
+<span data-post-id="5354822" class="post-view-count">阅读(4203)</span>
+<span data-post-id="5354822" class="post-comment-count">评论(1)</span>
+<span data-post-id="5354822" class="post-digg-count">推荐(0)</span>
+
+
+        </div>
+    </div>
+    <div class="post" role="article" aria-describedby="postlist_description_5354740" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/5354740.html">
+    <span>
+        技术人员如何创业《一》—— 产品及想法(转载)
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_5354740">
+摘要：        
+转载自LANCEYAN.COM 不得不说这是个浮躁的社会，人人在这个社会都想暴富或者成名。在这些引诱的驱使下很多人都脱离了原来的稳定工作创业。前几天看了《中国合伙人》，故事讲到了几个大学生从校园到工作、再到创办了一个伟大的企业，这个故事更加激励了创业大军的壮大。大家都想创业，那我们技术人员怎么创业？    <a href="https://www.cnblogs.com/xdp-gacl/p/5354740.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2016-04-05 14:04
+孤傲苍狼
+<span data-post-id="5354740" class="post-view-count">阅读(8973)</span>
+<span data-post-id="5354740" class="post-comment-count">评论(2)</span>
+<span data-post-id="5354740" class="post-digg-count">推荐(2)</span>
+
+
+        </div>
+    </div>
+
+		
+<!--
+<p class="date">
+    <a href="https://www.cnblogs.com/xdp-gacl/p/archive/2016/03/31" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+    <partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+    <div class="post" role="article" aria-describedby="postlist_description_5340657" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/5340657.html">
+    <span>
+        一页纸商业计划书 (Business Plan) 模板(转载)
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_5340657">
+摘要：        
+本文转载自:https://blog.eood.cn/business-plan 假如你也有一个 idea ，但是还处于想法阶段，这个商业计划书模板能够帮你理清思路。 这个一页 BP 模板简单实用，分几个部分： 1. 问题 (Problem) 项目解决什么问题？满足什么需求？ 2. 一句话介绍 (E    <a href="https://www.cnblogs.com/xdp-gacl/p/5340657.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2016-03-31 13:30
+孤傲苍狼
+<span data-post-id="5340657" class="post-view-count">阅读(16140)</span>
+<span data-post-id="5340657" class="post-comment-count">评论(1)</span>
+<span data-post-id="5340657" class="post-digg-count">推荐(8)</span>
+
+
+        </div>
+    </div>
+
+		
+<!--
+<p class="date">
+    <a href="https://www.cnblogs.com/xdp-gacl/p/archive/2016/03/23" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+    <partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+    <div class="post" role="article" aria-describedby="postlist_description_5288471" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/5288471.html">
+    <span>
+        公司项目架构的演变过程
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_5288471">
+摘要：        
+2015年3月份进入公司到现在了,在即将离职之际,总结一下一年多里在公司开发的项目的部署架构的的演变历程.    <a href="https://www.cnblogs.com/xdp-gacl/p/5288471.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2016-03-23 17:32
+孤傲苍狼
+<span data-post-id="5288471" class="post-view-count">阅读(19967)</span>
+<span data-post-id="5288471" class="post-comment-count">评论(9)</span>
+<span data-post-id="5288471" class="post-digg-count">推荐(15)</span>
+
+
+        </div>
+    </div>
+    <div class="post" role="article" aria-describedby="postlist_description_5290155" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/5290155.html">
+    <span>
+        腾讯云CentOS 6.6安装 Nginx
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_5290155">
+摘要：        
+从Nginx的官网（http://nginx.org/en/download.html）下载Nginx的最新版本，这里我下载的是nginx-1.9.12。 下载完成后，得到一个如下图所示的压缩包 上传nginx的tar包到Linux服务器上，如下图所示： 在安装Nginx前，需要确保系统安装了g++    <a href="https://www.cnblogs.com/xdp-gacl/p/5290155.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2016-03-23 17:29
+孤傲苍狼
+<span data-post-id="5290155" class="post-view-count">阅读(12366)</span>
+<span data-post-id="5290155" class="post-comment-count">评论(0)</span>
+<span data-post-id="5290155" class="post-digg-count">推荐(1)</span>
+
+
+        </div>
+    </div>
+    <div class="post" role="article" aria-describedby="postlist_description_5294181" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/5294181.html">
+    <span>
+        创业公司一年工作总结
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_5294181">
+摘要：        
+公司由于要转型，导致我们整个软件开发部门要解散了，作为开发部负责人的我也不得不离职了，在离职之际，总结一下自己在创业公司一年的工作感受吧。 2014年1月份年底的时候公司开完年会我就从公司离职了，整理了一下简历准备开始找重新工作，机缘巧合之下，在QQ群里面遇到了现在公司的技术负责人在招人，简单和他聊    <a href="https://www.cnblogs.com/xdp-gacl/p/5294181.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2016-03-23 16:32
+孤傲苍狼
+<span data-post-id="5294181" class="post-view-count">阅读(46104)</span>
+<span data-post-id="5294181" class="post-comment-count">评论(77)</span>
+<span data-post-id="5294181" class="post-digg-count">推荐(69)</span>
+
+
+        </div>
+    </div>
+
+		
+<!--
+<p class="date">
+    <a href="https://www.cnblogs.com/xdp-gacl/p/archive/2016/03/17" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+    <partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+    <div class="post" role="article" aria-describedby="postlist_description_5288399" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/5288399.html">
+    <span>
+        启动tomcat时 错误: 代理抛出异常 : java.rmi.server.ExportException: Port already in use: 1099的解决办法
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_5288399">
+摘要：        
+今天一来公司,在IntelliJ IDEA 中启动Tomcat服务器时就出现了如下图所示的错误: 错误: 代理抛出异常错误: java.rmi.server.ExportException: Port already in use: 1099; nested exception is: java.n    <a href="https://www.cnblogs.com/xdp-gacl/p/5288399.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2016-03-17 17:52
+孤傲苍狼
+<span data-post-id="5288399" class="post-view-count">阅读(62195)</span>
+<span data-post-id="5288399" class="post-comment-count">评论(7)</span>
+<span data-post-id="5288399" class="post-digg-count">推荐(19)</span>
+
+
+        </div>
+    </div>
+
+		
+<!--
+<p class="date">
+    <a href="https://www.cnblogs.com/xdp-gacl/p/archive/2016/02/23" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+    <partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+    <div class="post" role="article" aria-describedby="postlist_description_5209386" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/5209386.html">
+    <span>
+        windows下使用批处理脚本实现多个版本的JDK切换
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_5209386">
+摘要：        
+一.JDK版本切换批处理脚本 我们平时在window上做开发的时候，可能需要同时开发两个甚至多个项目，有时不同的项目对JDK的版本要求有区别，这时候我们可能会在一台电脑上安装多个版本的JDK,如下图所示: 当我们想要切换使用的JDK版本时,我们可以有两种做法: 1.手动去修改JAVA_HOME环境变    <a href="https://www.cnblogs.com/xdp-gacl/p/5209386.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2016-02-23 11:48
+孤傲苍狼
+<span data-post-id="5209386" class="post-view-count">阅读(11462)</span>
+<span data-post-id="5209386" class="post-comment-count">评论(6)</span>
+<span data-post-id="5209386" class="post-digg-count">推荐(15)</span>
+
+
+        </div>
+    </div>
+
+		
+<!--
+<p class="date">
+    <a href="https://www.cnblogs.com/xdp-gacl/p/archive/2016/02/16" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+    <partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+    <div class="post" role="article" aria-describedby="postlist_description_5193279" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/5193279.html">
+    <span>
+        Java后端WebSocket的Tomcat实现
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_5193279">
+摘要：        
+一.WebSocket简单介绍 随着互联网的发展，传统的HTTP协议已经很难满足Web应用日益复杂的需求了。近年来，随着HTML5的诞生，WebSocket协议被提出，它实现了浏览器与服务器的全双工通信，扩展了浏览器与服务端的通信功能，使服务端也能主动向客户端发送数据。 我们知道，传统的HTTP协议    <a href="https://www.cnblogs.com/xdp-gacl/p/5193279.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2016-02-16 17:06
+孤傲苍狼
+<span data-post-id="5193279" class="post-view-count">阅读(233228)</span>
+<span data-post-id="5193279" class="post-comment-count">评论(46)</span>
+<span data-post-id="5193279" class="post-digg-count">推荐(68)</span>
+
+
+        </div>
+    </div>
+    <div class="post" role="article" aria-describedby="postlist_description_5161206" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/5161206.html">
+    <span>
+        微信开发学习总结（三）——开发微信公众号的最基本功能——普通消息的接收和回复
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_5161206">
+摘要：        
+在上篇《微信开发学习总结（二）——微信开发入门》我们介绍了微信公众平台的基本原理，如何接入微信公众号，如何保持access_token的长期有效性以及进行了简单的文本消息测试，本篇再来具体细说一如何实现微信公众号的最基本功能：普通消息的接收和回复。 一、微信公众平台消息管理接口介绍 要实现微信公众号    <a href="https://www.cnblogs.com/xdp-gacl/p/5161206.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2016-02-16 14:05
+孤傲苍狼
+<span data-post-id="5161206" class="post-view-count">阅读(68453)</span>
+<span data-post-id="5161206" class="post-comment-count">评论(29)</span>
+<span data-post-id="5161206" class="post-digg-count">推荐(32)</span>
+
+
+        </div>
+    </div>
+
+		
+<!--
+<p class="date">
+    <a href="https://www.cnblogs.com/xdp-gacl/p/archive/2016/01/27" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+    <partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+    <div class="post" role="article" aria-describedby="postlist_description_5151857" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/5151857.html">
+    <span>
+        微信开发学习总结（二）——微信开发入门
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_5151857">
+摘要：        
+上一篇《微信开发学习总结（一）——微信开发环境搭建》我们已经完成了微信开发的准备工作，准备工作完成之后，就要开始步入正题了。一、微信公众平台的基本原理 在开始做之前，先简单介绍了微信公众平台的基本原理。 微信服务器就相当于一个转发服务器，终端（手机、Pad等）发起请求至微信服务器，微信服务器...    <a href="https://www.cnblogs.com/xdp-gacl/p/5151857.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2016-01-27 10:04
+孤傲苍狼
+<span data-post-id="5151857" class="post-view-count">阅读(56820)</span>
+<span data-post-id="5151857" class="post-comment-count">评论(28)</span>
+<span data-post-id="5151857" class="post-digg-count">推荐(32)</span>
+
+
+        </div>
+    </div>
+
+		
+<!--
+<p class="date">
+    <a href="https://www.cnblogs.com/xdp-gacl/p/archive/2016/01/26" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+    <partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+    <div class="post" role="article" aria-describedby="postlist_description_5149171" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/5149171.html">
+    <span>
+        微信开发学习总结（一）——微信开发环境搭建
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_5149171">
+摘要：        
+目前移动开发处于比较火的的趋势,很多的开发者都跃跃欲试,目前移动App开发领域主要分为以下几种类型 我在平时的工作中接触得比较多的就是基于Android的Native App开发和基于微信公众号的Light App开发,今天就来带领大家快速进入微信公众号的开发领域.一、微信开发环境搭建 ...    <a href="https://www.cnblogs.com/xdp-gacl/p/5149171.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2016-01-26 17:56
+孤傲苍狼
+<span data-post-id="5149171" class="post-view-count">阅读(95141)</span>
+<span data-post-id="5149171" class="post-comment-count">评论(42)</span>
+<span data-post-id="5149171" class="post-digg-count">推荐(70)</span>
+
+
+        </div>
+    </div>
+
+		
+<!--
+<p class="date">
+    <a href="https://www.cnblogs.com/xdp-gacl/p/archive/2015/07/26" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+    <partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+    <div class="post" role="article" aria-describedby="postlist_description_4677145" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/4677145.html">
+    <span>
+        Android开发学习总结（六）—— APK反编译
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_4677145">
+摘要：        
+学习和开发Android应用有一段时间了，今天写一篇博客总结一下Android的apk文件反编译。我们知道，Android应用开发完成之后，我们最终都会将应用打包成一个apk文件，然后让用户通过手机或者平板电脑下载下来进行安装。正常情况下，Android应用打包成apk之后，就无法再看到开发这个...    <a href="https://www.cnblogs.com/xdp-gacl/p/4677145.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2015-07-26 12:48
+孤傲苍狼
+<span data-post-id="4677145" class="post-view-count">阅读(40397)</span>
+<span data-post-id="4677145" class="post-comment-count">评论(10)</span>
+<span data-post-id="4677145" class="post-digg-count">推荐(15)</span>
+
+
+        </div>
+    </div>
+
+		
+<!--
+<p class="date">
+    <a href="https://www.cnblogs.com/xdp-gacl/p/archive/2015/07/04" style="display:inline-block;border-width:0px;height:15px;width:12px;"></a>
+
+    <partial name="./Shared/_DateTitle.cshtml"/>		  
+</p>
+-->
+
+    <div class="post" role="article" aria-describedby="postlist_description_4338352" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/4338352.html">
+    <span>
+        Android开发学习总结(五)——Android应用目录结构分析
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_4338352">
+摘要：        
+一、手动创建android项目 手动创建一个Android项目，命名为HelloWorld，命令如下：android create project -n HelloWorld -t 1 -p E:/Android/workspace/Helloworld -k me.gacl.helloworl...    <a href="https://www.cnblogs.com/xdp-gacl/p/4338352.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2015-07-04 15:28
+孤傲苍狼
+<span data-post-id="4338352" class="post-view-count">阅读(9662)</span>
+<span data-post-id="4338352" class="post-comment-count">评论(2)</span>
+<span data-post-id="4338352" class="post-digg-count">推荐(0)</span>
+
+
+        </div>
+    </div>
+    <div class="post" role="article" aria-describedby="postlist_description_4324503" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/4324503.html">
+    <span>
+        Android开发学习总结——Android开发的一些相关概念
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_4324503">
+摘要：        
+一、什么是3G、4G 1995年问世的第一代模拟制式手机（1G）只能进行语音通话。 1996到1997年出现的第二代GSM、CDMA等数字制式手机（2G）便增加了接收数据的功能 3G指的是第三代移动通信技术（3rd - Generation），速率一般在几百Kbps，较之前的2G和2.5G在...    <a href="https://www.cnblogs.com/xdp-gacl/p/4324503.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2015-07-04 15:21
+孤傲苍狼
+<span data-post-id="4324503" class="post-view-count">阅读(5590)</span>
+<span data-post-id="4324503" class="post-comment-count">评论(0)</span>
+<span data-post-id="4324503" class="post-digg-count">推荐(0)</span>
+
+
+        </div>
+    </div>
+    <div class="post" role="article" aria-describedby="postlist_description_4354199" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/4354199.html">
+    <span>
+        Eclipse在线安装SVN
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_4354199">
+摘要：        
+一、SVN在线安装 下面为在线安装SVN插件。以下是在线安装步骤： 其中http://subclipse.tigris.org/update_1.10.x是最新版本的SVN插件的下载站点【subclipse是Eclipse的SVN插件】。 点击【Finish】按钮开始安装S...    <a href="https://www.cnblogs.com/xdp-gacl/p/4354199.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2015-07-04 15:19
+孤傲苍狼
+<span data-post-id="4354199" class="post-view-count">阅读(72390)</span>
+<span data-post-id="4354199" class="post-comment-count">评论(4)</span>
+<span data-post-id="4354199" class="post-digg-count">推荐(10)</span>
+
+
+        </div>
+    </div>
+    <div class="post" role="article" aria-describedby="postlist_description_4320726" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/4320726.html">
+    <span>
+        Android开发学习总结(四)——Eclipse在线安装ADT插件
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_4320726">
+摘要：        
+要想使用Eclipse开发Android应用，首先要安装一个ADT插件，在此记录一下在Eclipse中采用在线安装的方式ADT插件，我使用的Eclipse版本是：eclipse-jee-luna-SR2-win32-x86_64，操作步骤如下：Help --&gt; Install new softw...    <a href="https://www.cnblogs.com/xdp-gacl/p/4320726.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2015-07-04 15:16
+孤傲苍狼
+<span data-post-id="4320726" class="post-view-count">阅读(4691)</span>
+<span data-post-id="4320726" class="post-comment-count">评论(1)</span>
+<span data-post-id="4320726" class="post-digg-count">推荐(1)</span>
+
+
+        </div>
+    </div>
+    <div class="post" role="article" aria-describedby="postlist_description_4339945" aria-level="2">
+        <h2 class="postTitle">
+            <a class="postTitle2 vertical-middle" href="https://www.cnblogs.com/xdp-gacl/p/4339945.html">
+    <span>
+        Android开发中遇到的问题(五)——Eclipse导入Android项目出现&quot;Invalid project description overlaps the location of another project&quot;错误的解决办法
+    </span>
+    
+
+</a>
+        </h2>
+        <div class="postText">
+            
+
+<div class="c_b_p_desc" id="postlist_description_4339945">
+摘要：        
+一、错误描述 使用如下的命令手动创建一个Android项目android create project -n LinearLayoutTest -t 1 -p E:/Android/workspace/LinearLayoutTest -k me.gacl.ui -a MainActivity ...    <a href="https://www.cnblogs.com/xdp-gacl/p/4339945.html" class="c_b_p_desc_readmore">阅读全文</a>
+</div>
+
+
+        </div>
+        <div class="postFoot">
+            posted @ 2015-07-04 15:11
+孤傲苍狼
+<span data-post-id="4339945" class="post-view-count">阅读(23191)</span>
+<span data-post-id="4339945" class="post-comment-count">评论(1)</span>
+<span data-post-id="4339945" class="post-digg-count">推荐(0)</span>
+
+
+        </div>
+    </div>
+
+
+<div class="topicListFooter">
+    <div id="nav_next_page">
+        
+    <a href="https://www.cnblogs.com/xdp-gacl?page=2">
+        下一页
+    </a>
+
+    </div>    
+</div>
+
+
+
+
+
+
+<script>
+    updatePostStats(
+        $(".post-view-count").map(function () { return this.dataset.postId }).get(),
+        function(id, count) { $(".post-view-count[data-post-id=" + id + "]").text("阅读(" + count + ")") },
+        function(id, count) { $(".post-comment-count[data-post-id=" + id + "]").text("评论(" + count + ")") },
+        function(id, count) { $(".post-digg-count[data-post-id=" + id + "]").text("推荐(" + count + ")") });
+</script>
+</div>
+<div id="rightmenu">
+    
+<div id="my_links">
+<h3>导航</h3>
+<ul>
+<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">
+博客园</a>
+</li>
+<li>
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/xdp-gacl/">
+首页</a>
+</li>
+
+<li>
+<a id="blog_nav_contact" class="menu" href="https://msg.cnblogs.com/send/%E5%AD%A4%E5%82%B2%E8%8B%8D%E7%8B%BC">
+联系</a></li>
+<li>
+<a id="blog_nav_rss" class="menu" href="javascript:void(0)" data-rss="https://www.cnblogs.com/xdp-gacl/rss/">
+订阅</a></li><!--<partial name="./Shared/_XmlLink.cshtml" model="Model" />-->
+<li>
+<a id="blog_nav_admin" class="menu" href="https://i.cnblogs.com/">
+管理</a>
+</li>
+</ul>
+</div>
+
+
+    <div id="calendar">
+        <div id="blog-calendar" style="display: none"></div>
+    </div>
+    <script>loadBlogDefaultCalendar();</script>
+    <div id="sidebar_news" class="newsItem">
+    <h3>公告</h3>
+<div class="newsItem">
+	<div id="blog-news" class="sidebar-news">
+    <div id="sidebar_news_container">
+    </div>
+</div>
+<script>loadBlogNews();</script>
+</div>
+
+
+</div>
+    <div id="blog_stats_place_holder"><script>loadBlogStats();</script></div>
+    <div id="blog-sidecolumn"></div>
+    <script>loadBlogSideColumn();</script>
+    <div id="footer">
+    <a href="https://www.cnblogs.com/" id="footer_site_link" class="footer-brand">博客园</a><span class="footer-copyright"> &nbsp;&copy;&nbsp; 2004-2026</span>
+<br /><span class="footer-icp">
+    <a target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=33010602011771"><img src="//assets.cnblogs.com/images/ghs.png" />浙公网安备 33010602011771号</a>
+    <a href="https://beian.miit.gov.cn" target="_blank">浙ICP备2021040463号-3</a>
+</span>
+
+</div>
+
+
+</div>
+
+    <div id="page_end_html">
+        <!--评论，生成气泡效果标签代码-->
+<script type="text/javascript" language="javascript"> 
+    $(document).ready(function() {
+        var commentTime = setInterval(function(){if($("#comments_pager_bottom").length>0){CommentBubble();clearTimeout(commentTime);}},50);
+    }); 
+    function CommentBubble()
+    {
+var w1 = '<div class="list">' +
+        '<table class="out" border="0" cellspacing="0" cellpadding="0"> ' +
+            '<tr>' +
+                '<td class="icontd" align="right" valign="bottom">' +
+                    '<img src="https://pic.cnblogs.com/face/289233/20131202131125.png" width="70px" height="57px"/>' +
+                '</td>' +
+                '<td align="left" valign="bottom" class="q">' +
+                    '<table border="0" cellpadding="0" cellspacing="0" style=""> ' +
+                        '<tr><td class="topleft"></td><td class="top"></td><td class="topright"></td></tr> ' +
+                        '<tr><td class="left"></td> <td align="left" class="conmts"><p>';
+ 
+ 
+        var w2 = '</p> </td> <td class="right"></td></tr> ' +
+                        '<tr><td class="bottomleft"></td><td class="bottom"></td><td class="bottomright"></td></tr> ' +
+                    '</table>' +
+                '</td> ' +
+            '</tr> ' +
+        '</table> ' +
+    '</div>';
+ 
+        $.each($(".blog_comment_body"), function(i, t) {
+            $(t).html(w1 + $(t).html() + w2);
+        });
+$(".louzhu").closest(".feedbackItem").find(".out").removeClass("out").addClass("inc");
+        /*.find(".q").attr("align","right");*/
+        }
+</script>
+    </div>
+
+    <input type="hidden" id="antiforgery_token" value="CfDJ8E2WNf1AXE5GolAm9rsxlHD1bY_qF8frGpHpCyLiIk7hXHpFeXONVuVL2UvR3UaR3BDS-v-dNTzSDsM21K0iatzgQOO0ZoGZ9_TYdS5G717J6SRw4d81uJNKvkls8TSA2zysDjtwdA5UT3AzUcfTEhI" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M95P3TTWJZ"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-M95P3TTWJZ');
+</script>
+<script defer src="https://hm.baidu.com/hm.js?866c9be12d4a814454792b1fd0fed295"></script>
+</body>
 </html>
